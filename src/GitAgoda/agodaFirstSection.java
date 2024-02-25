@@ -19,11 +19,11 @@ public static void main(String[] args) throws InterruptedException
 {
 	WebDriver driver=new ChromeDriver();
 	driver.manage().window().maximize();
-	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(40));
+	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(80));
 	driver.get("https://www.agoda.com/");
 	Actions action=new Actions(driver);
 	WebElement poplinks=driver.findElement(By.xpath("//button[text()='No thanks']"));
-	WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(40));
+	WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(80));
 	wait.until(ExpectedConditions.visibilityOf(poplinks));
 	poplinks.click();
 	WebElement selecttextfield=driver.findElement(By.xpath("//input[@aria-label='Enter a destination or property']"));
@@ -45,19 +45,37 @@ public static void main(String[] args) throws InterruptedException
 	action.click(fromday).pause(2000).build().perform();
 	WebElement toDay=driver.findElement(By.xpath("//div[text()='"+frommonth+" "+year+"']/..//span[text()="+day2+"]"));
 	action.click(toDay).pause(2000).build().perform();
-	driver.findElement(By.xpath("//p[text()='Room']/../..//button[@data-selenium='plus']")).click();
+	
+	
+	for(int i = 1; i<2; i++)
+	{
+		driver.findElement(By.xpath("//p[text()='Room']/../..//button[@data-selenium='plus']")).click();
+	}
+	Thread.sleep(4000);
+	for(int i=1;i<3;i++)
+	{
 	WebElement selectadult=driver.findElement(By.xpath("//p[text()='Adults']/../..//button[@data-selenium='plus']"));
-	action.click(selectadult).pause(2000).click(selectadult).perform();
+	selectadult.click();
+	}
+	Thread.sleep(4000);
+	//action.click(selectadult).pause(2000).click(selectadult).perform();
+//for(int i=0;i<2;i++)
+//	{
 	WebElement selectchildren=driver.findElement(By.xpath("//p[text()='Children']/../..//button[@data-selenium='plus']"));
+	//selectchildren.click();
+	//Thread.sleep(2000);
+//}
+	Thread.sleep(4000);
 	action.click(selectchildren).click(selectchildren).pause(2000).perform();
+	
 	WebElement child1=driver.findElement(By.xpath("//select[@aria-label=\"Age of Child 1(Child's age (years))\"]"));
 	WebElement child2=driver.findElement(By.xpath("//select[@aria-label=\"Age of Child 2(Child's age (years))\"]"));
 	Select child1select=new Select(child1);
 	child1select.selectByValue("7");
-	Thread.sleep(2000);
+	Thread.sleep(4000);
 	Select child2select=new Select(child2);
 	child2select.selectByValue("5");
-	Thread.sleep(2000);
+	Thread.sleep(4000);
 	driver.findElement(By.xpath("//span[text()='SEARCH']")).click();
 	Thread.sleep(2000);
 	driver.manage().window().minimize();
