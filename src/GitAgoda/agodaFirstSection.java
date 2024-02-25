@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class agodaFirstSection 
@@ -44,6 +45,24 @@ public static void main(String[] args) throws InterruptedException
 	action.click(fromday).pause(2000).build().perform();
 	WebElement toDay=driver.findElement(By.xpath("//div[text()='"+frommonth+" "+year+"']/..//span[text()="+day2+"]"));
 	action.click(toDay).pause(2000).build().perform();
+	driver.findElement(By.xpath("//p[text()='Room']/../..//button[@data-selenium='plus']")).click();
+	WebElement selectadult=driver.findElement(By.xpath("//p[text()='Adults']/../..//button[@data-selenium='plus']"));
+	action.click(selectadult).pause(2000).click(selectadult).perform();
+	WebElement selectchildren=driver.findElement(By.xpath("//p[text()='Children']/../..//button[@data-selenium='plus']"));
+	action.click(selectchildren).click(selectchildren).pause(2000).perform();
+	WebElement child1=driver.findElement(By.xpath("//select[@aria-label=\"Age of Child 1(Child's age (years))\"]"));
+	WebElement child2=driver.findElement(By.xpath("//select[@aria-label=\"Age of Child 2(Child's age (years))\"]"));
+	Select child1select=new Select(child1);
+	child1select.selectByValue("7");
+	Thread.sleep(2000);
+	Select child2select=new Select(child2);
+	child2select.selectByValue("5");
+	Thread.sleep(2000);
+	driver.findElement(By.xpath("//span[text()='SEARCH']")).click();
+	Thread.sleep(2000);
+	driver.manage().window().minimize();
+	driver.quit();
+	
 	
 	
 	
