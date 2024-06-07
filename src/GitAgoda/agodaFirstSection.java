@@ -67,7 +67,6 @@ public static void main(String[] args) throws InterruptedException
 //}
 	Thread.sleep(4000);
 	action.click(selectchildren).click(selectchildren).pause(2000).perform();
-	
 	WebElement child1=driver.findElement(By.xpath("//select[@aria-label=\"Age of Child 1(Child's age (years))\"]"));
 	WebElement child2=driver.findElement(By.xpath("//select[@aria-label=\"Age of Child 2(Child's age (years))\"]"));
 	Select child1select=new Select(child1);
@@ -80,9 +79,6 @@ public static void main(String[] args) throws InterruptedException
 	Thread.sleep(2000);
 	driver.manage().window().minimize();
 	driver.quit();
-	
-	
-	
 	
 	
 }
